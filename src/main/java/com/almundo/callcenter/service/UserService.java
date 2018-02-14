@@ -8,24 +8,33 @@ import org.springframework.stereotype.Service;
 import com.almundo.callcenter.model.Rol;
 import com.almundo.callcenter.model.User;
 
+/** Servicio que administra los usuarios
+ * @author Jorge Aguirre
+ *
+ */
 @Service
 public class UserService {
 	
 	private List<User> users;
 	
+	/** Constructor del servicio con los usuarios iniciales
+	 * @param users
+	 */
 	public UserService(List<User> users) {
 		this.users = users;
 	}
 
 	/** Función para obtener un usuario disponible
-	 * @return
+	 * @return User
 	 */
-	public User getAvailableUser() {
+	public synchronized User getAvailableUser() {
 		 List<User> resultOperators = this.users.stream()
                 .filter(user -> user.getRol().getId().equals(Rol.OPERATOR) && user.isAvailable())
                 .collect(Collectors.toList());   
 		 if(resultOperators.size()>0) {
-			 return resultOperators.get(0);
+			 User user = resultOperators.get(0);
+			 user.setAvailable(User.BUSY);
+			 return user;
 		 }
 		 
 		 List<User> resultSupervisor = this.users.stream()
@@ -33,7 +42,9 @@ public class UserService {
                 .collect(Collectors.toList()); 
 		 
 		 if(resultSupervisor.size()>0) {
-			 return resultSupervisor.get(0);
+			 User user = resultSupervisor.get(0);
+			 user.setAvailable(User.BUSY);
+			 return user;
 		 }
 		 
 		 List<User> resultDirector = this.users.stream()
@@ -41,7 +52,9 @@ public class UserService {
 	                .collect(Collectors.toList()); 
 			 
 		 if(resultDirector.size()>0) {
-			 return resultDirector.get(0);
+			 User user = resultDirector.get(0);
+			 user.setAvailable(User.BUSY);
+			 return user;
 		 }
 		 return null;
 	}

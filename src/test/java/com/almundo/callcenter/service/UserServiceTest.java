@@ -13,6 +13,10 @@ import com.almundo.callcenter.common.MockTestData;
 import com.almundo.callcenter.model.Rol;
 import com.almundo.callcenter.model.User;
 
+/** Clase de prueba del servicio de usuarios
+ * @author Jorge Aguirre
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceTest {

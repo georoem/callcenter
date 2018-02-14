@@ -1,6 +1,6 @@
 package com.almundo.callcenter.model;
 
-/** User model
+/** Entidad usuario
  * @author Jorge Aguirre
  *
  */
@@ -17,6 +17,12 @@ public class User {
 	
 	private Rol rol;
 	
+	/** Constructor de la entidad usuario con el identificador del usuairo, el username, la disponibilidad inicial y el rol
+	 * @param id
+	 * @param username
+	 * @param available
+	 * @param rol
+	 */
 	public User(Long id, String username, Boolean available, Rol rol) {
 		super();
 		this.id = id;

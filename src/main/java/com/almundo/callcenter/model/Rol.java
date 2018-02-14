@@ -1,6 +1,6 @@
 package com.almundo.callcenter.model;
 
-/** User rol model
+/** Entidad del rol del usuario
  * @author Jorge Aguirre
  *
  */
@@ -14,6 +14,10 @@ public class Rol {
 	
 	private String description;
 
+	/** Contructor de la entidad Rol con el identificado del rol y la descripción del mismo
+	 * @param id
+	 * @param description
+	 */
 	public Rol(Long id, String description) {
 		this.id = id;
 		this.description = description;

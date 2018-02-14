@@ -1,6 +1,6 @@
 package com.almundo.callcenter.model;
 
-/** Call model
+/** Entidad de la llamada
  * @author Jorge Aguirre
  *
  */
@@ -12,6 +12,10 @@ public class Call {
 	
 	private User user;
 	
+	/** Constructor de la entidad Call con un identificador y la duración de la llamada
+	 * @param id
+	 * @param duration
+	 */
 	public Call(Long id, Integer duration) {
 		super();
 		this.id = id;

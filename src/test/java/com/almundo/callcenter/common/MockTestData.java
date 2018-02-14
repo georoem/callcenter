@@ -1,13 +1,19 @@
 package com.almundo.callcenter.common;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Queue;
 
 import com.almundo.callcenter.model.Call;
 import com.almundo.callcenter.model.Rol;
 import com.almundo.callcenter.model.User;
+import com.almundo.callcenter.util.Util;
 
+/** Clase utilitaria que provee todos los datos de prueba
+ * @author Jorge Aguirre
+ *
+ */
 public class MockTestData {
 	
 	private static final int CALL_DURATION_1 = 5;
@@ -86,17 +92,12 @@ public class MockTestData {
 		return users;
 	}
 
-	public static List<Call> getListCallTest() {
-		List<Call> calls = new ArrayList<>();
+	public static Queue<Call> getQueueCallTest() {
+		Queue<Call> calls = new LinkedList<>();
 		for(int i=0; i < 20; i++){
-			calls.add(new Call(new Long(i), randomDuration()));
+			calls.add(new Call(new Long(i), Util.randomDuration()));
 		}
 		return calls;
 	}
 	
-	public static Integer randomDuration(){
-		int max = 10;
-		int min= 5;
-		return ThreadLocalRandom.current().nextInt(min, max + 1);
-	}
 }
