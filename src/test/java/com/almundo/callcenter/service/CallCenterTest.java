@@ -20,15 +20,11 @@ import static org.mockito.Mockito.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CallCenterTest {
-	
-	@Autowired
-	private CallCenter callCenter;
 
 	@Test
 	public void tenCallsAtTheSameTimeTest() {
 		Queue<Call> calls = MockTestData.getQueueCallTest();
-		CallCenter c = mock(CallCenter.class);
-	    when(c.getCalls()).thenReturn(calls);
+		CallCenter callCenter = new CallCenter(calls);
 		callCenter.start();
 	}
 }

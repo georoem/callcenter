@@ -23,6 +23,9 @@ public class Dispatcher implements Runnable{
 	
 	private Call call;
 	
+	/** Setea la llamada que va a atender
+	 * @param call
+	 */
 	public void setCall(Call call) {
 		this.call = call;
 	}
