@@ -67,7 +67,7 @@ public class Dispatcher implements Runnable{
 		
 		System.out.println("Call " + actualCall.getId() + 
 				" with duration " + actualCall.getDuration() + 
-				" is attending by "+ user.getUsername() +
+				" is attending by user "+ user.getId() +
 				" with the rol " + user.getRol().getDescription());
 		
 		try {
@@ -75,6 +75,8 @@ public class Dispatcher implements Runnable{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		userService.setAvailableUser(user);
 
 		System.out.println("Call " + actualCall.getId() + " ends");
 		

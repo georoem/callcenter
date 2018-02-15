@@ -58,5 +58,11 @@ public class UserService {
 		 }
 		 return null;
 	}
+
+	public void setAvailableUser(User user) {
+		User userBusy = users.get(users.indexOf(user));
+		userBusy.setAvailable(User.AVAILABLE);
+		System.out.println("User " + userBusy.getId() + " is set available");
+	}
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.almundo.callcenter.CallcenterApplication;
 import com.almundo.callcenter.model.Call;
+import com.almundo.callcenter.model.User;
 
 /** Classe que administra las llamadas
  * @author Jorge Aguirre
@@ -42,6 +43,13 @@ public class CallCenter {
 		this.calls.offer(call);
 	}
 	
+	/** Elimina la relación de la llamada con el usuario
+	 * @param call
+	 */
+	public void endCall(Call call) {
+		call.setUser(null);
+	}
+	
 	/**
 	 * Método de inicio de atención de la cola de llamadas
 	 */
@@ -51,9 +59,13 @@ public class CallCenter {
 		
 		while (getCalls().size() > 0){
 			Call call = getCalls().poll();
-			Dispatcher dispatcher = (Dispatcher) context.getBean("dispatcher");
-			dispatcher.setCall(call);
-			taskExecutor.execute(dispatcher);
+			if(taskExecutor.getActiveCount()<taskExecutor.getMaxPoolSize()) {
+				Dispatcher dispatcher = (Dispatcher) context.getBean("dispatcher");
+				dispatcher.setCall(call);
+				taskExecutor.execute(dispatcher);
+			} else {
+				getCalls().offer(call);
+			}
 		}
 		
 		if (this.calls.size() == 0) {
